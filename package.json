@@ -1,0 +1,32 @@
+{
+  "name": "clio-decimal",
+  "version": "1.0.0",
+  "description": "Clio language decimal implementation based on JS BigInt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clio-lang/clio-decimal.git"
+  },
+  "keywords": [
+    "decimal",
+    "bignum",
+    "bigint"
+  ],
+  "jest": {
+    "transform": {}
+  },
+  "author": "Pouya Eghbali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clio-lang/clio-decimal/issues"
+  },
+  "homepage": "https://github.com/clio-lang/clio-decimal#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "break_infinity.js": "^1.0.5",
+    "decimal.js": "^10.1.1"
+  }
+}
