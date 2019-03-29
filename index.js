@@ -177,7 +177,7 @@ class Decimal {
     }
 
     floor() {
-        return this.toBigInt();
+        return new Decimal({numerator: this.toBigInt(), denominator: 1n});
     }
 
     toBigInt() {
