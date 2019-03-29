@@ -4,16 +4,31 @@ class Decimal {
             data = data.toString();
         }
         if (data.constructor == String) {
-            var dot = data.indexOf('.');
-            if (dot == -1) {
+            data = data.toLowerCase();
+            if (data == 'inf') {
                 data = {
-                    numerator: BigInt(data),
-                    denominator: 1n
+                    numerator: Infinity,
+                    denominator: 1n,
                 }
-            } else {
+            }
+            else if (data == '-inf') {
                 data = {
-                    numerator: BigInt(data.replace(/\./, '')),
-                    denominator: 10n ** BigInt(data.length - dot - 1)
+                    numerator: -Infinity,
+                    denominator: 1n,
+                }
+            }
+            else {
+                var dot = data.indexOf('.');
+                if (dot == -1) {
+                    data = {
+                        numerator: BigInt(data),
+                        denominator: 1n
+                    }
+                } else {
+                    data = {
+                        numerator: BigInt(data.replace(/\./, '')),
+                        denominator: 10n ** BigInt(data.length - dot - 1)
+                    }
                 }
             }
         }
