@@ -39,6 +39,7 @@ Power:
 
 Other math functions:
 
+* floor
 * abs
 * ln (natural log using area hyperbolic tangent function: needs optimization)
 

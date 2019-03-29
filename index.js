@@ -176,6 +176,10 @@ class Decimal {
         return ln.mul(new Decimal('2')).normalize();
     }
 
+    floor() {
+        return this.toBigInt();
+    }
+
     toBigInt() {
         return this.numerator / this.denominator;
     }
