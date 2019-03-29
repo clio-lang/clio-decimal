@@ -164,7 +164,7 @@ class Decimal {
         var z = this;
         for (let i = 1; i < it; i += 2) {
             var _i = new Decimal(`${i}`)
-            ln = ln.add((z.sub(one).div(z.add(one))).ipow(_i).div(_i));
+            ln = ln.add((z.sub(one).div(z.add(one))).pow(_i).div(_i));
         }
         return ln.mul(new Decimal('2')).normalize();
     }
