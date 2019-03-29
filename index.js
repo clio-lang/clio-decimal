@@ -123,21 +123,28 @@ class Decimal {
         /*
             Taylor series power approximation
 
+            a^b.c = a^b * a^0.c
+
             a ^ n = e ^ (n * ln(a))
             e ^ (n * ln(a)) = [1 + 1/k! (n ln(a)) ** k]
         */
-       it = it || 36; // good accuracy without killing much performance
+       var left = n.numerator / n.denominator;
+       var right = n.numerator - (left * n.denominator);
+       left = new Decimal({numerator: left, denominator: 1n});
+       right = new Decimal({numerator: right, denominator: n.denominator});       
+       it = it || 34; // good accuracy without killing much performance
+       // taylor series approximation of the right side
        var result = new Decimal('1');
-       var nln = this.ln().mul(n);
-       var nln_pow = nln;
+       var rln = this.ln().mul(right).normalize();
+       var rln_pow = rln;
        var fact = new Decimal('1');
        for (let i = 1; i < it; i++) {
            var k = new Decimal(`${i}`);
-           fact = fact.mul(k);
-           result = result.add(nln_pow.div(fact));
-           nln_pow = nln_pow.mul(nln);
-       }
-       return result.normalize();
+           fact = fact.mul(k).normalize();
+           result = result.add(rln_pow.div(fact));
+           rln_pow = rln_pow.mul(rln).normalize();
+       }       
+       return this.pow(left).mul(result).normalize();
     }
 
     fact() {
