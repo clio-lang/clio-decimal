@@ -1,6 +1,6 @@
 {
   "name": "clio-decimal",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Clio language decimal implementation based on JS BigInt",
   "main": "index.js",
   "scripts": {
