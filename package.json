@@ -19,7 +19,7 @@
     "transform": {}
   },
   "author": "Pouya Eghbali",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/clio-lang/clio-decimal/issues"
   },
