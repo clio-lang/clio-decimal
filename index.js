@@ -66,6 +66,10 @@ class Decimal {
     }
 
     abs() {
+        /*
+              abs(a / b) = abs(a) / abs(b)
+            | or when both have the same sign
+        */
         var numerator = this.numerator > 0n ? this.numerator : this.numerator * -1n;
         var denominator = this.denominator > 0n ? this.denominator : this.denominator * -1n;
         return new Decimal({numerator, denominator});
@@ -77,15 +81,48 @@ class Decimal {
         */
        return (this.numerator * n.denominator) > (n.numerator * this.denominator)
     }
+    
+    gte(n) {
+        /*
+            a/b >= A/B -> aB > Ab
+        */
+       return (this.numerator * n.denominator) >= (n.numerator * this.denominator)
+    }
+    
+    lt(n) {
+        /*
+            a < b -> b > a
+        */
+       return n.gt(this)
+    }
+    
+    lte(n) {
+        /*
+            a <= b -> b >= a
+        */
+       return n.gte(this)
+    }
+    
+    eq(n) {
+        /*
+            a/b == A/B -> aB == Ab
+        */
+       return (this.numerator * n.denominator) == (n.numerator * this.denominator)
+    }
 
-    ipow(n) {
+    pow(n) {
+        /*
+            (a / b) ^ (c / d) = a ^ (c / d) / b ^ (c / d)
+        */
         var numerator = this.numerator ** (n.numerator / n.denominator)
         var denominator = this.denominator ** (n.numerator / n.denominator)
         return new Decimal({numerator, denominator});
     }
 
-    pow(n, it) {
+    tpow(n, it) {
         /*
+            Taylor series power approximation
+
             a ^ n = e ^ (n * ln(a))
             e ^ (n * ln(a)) = [1 + 1/k! (n ln(a)) ** k]
         */
@@ -118,6 +155,8 @@ class Decimal {
         /*
             Area hyperbolic tangent function
             https://en.wikipedia.org/wiki/Logarithm#Calculation
+            This isn't fast, nor accurate
+            We need a better approximation
         */
         it = it || 10; // max iterations
         var one = new Decimal('1');
@@ -128,6 +167,10 @@ class Decimal {
             ln = ln.add((z.sub(one).div(z.add(one))).ipow(_i).div(_i));
         }
         return ln.mul(new Decimal('2')).normalize();
+    }
+
+    toBigInt() {
+        return this.numerator / this.denominator;
     }
 
     toNumber() {        
