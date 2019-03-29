@@ -35,12 +35,12 @@ Comparison:
 Power:
 
 * pow (integer pow)
-* tpow (decimal pow using taylor series: needs optimization)
+* tpow (decimal pow using ln and taylor series: needs optimization)
 
 Other math functions:
 
 * abs
-* ln (natural log: needs optimization)
+* ln (natural log using area hyperbolic tangent function: needs optimization)
 
 Utilities:
 
